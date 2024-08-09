@@ -28,8 +28,8 @@ Jenkins는 소프트웨어 빌드, 테스트, 제공 또는 배포와 관련된 
 
 ## 3. 공통 Jenkins 작업
 
-- [Job 생성 방법](Docs/job-create.md)
-- [Plugin 설치 방법](Docs/plugin-install.md)
+- [Job 생성 방법](docs/job-create.md)
+- [Plugin 설치 방법](docs/plugin-install.md)
 - GitLab Connection 설정 방법
 
 <br/>
@@ -65,7 +65,7 @@ Vue3 프로젝트 빌드
 
 1. Job 생성
 2. GitLab Connection 설정
-3. [pipeline](pipeline/vue-build-pipeline.md) 설정
+3. [pipeline](docs/vue-build-pipeline.md) 설정
 
 <br/>
 
