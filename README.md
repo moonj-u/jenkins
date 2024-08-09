@@ -35,6 +35,8 @@ Vue3 프로젝트 빌드
 ```
 1. Plugin 설치
 
+<br/>
+
 ### 3-2. Maven 프로젝트 빌드
 
 ```
@@ -49,31 +51,43 @@ Spring Boot 프로젝트 빌드
 
 ```
 Vue3 프로젝트 빌드
+
+필요한 PlugIn
+- GitLab
 ```
+1. 새로운 Item에서 Pipeline을 생성한다.
+2. GitLab Connection 설정
+3. [pipeline](jenkins/pipeline/gitlabflow-pipeline.md)
+
+<br/>
 
 ### 4-2. Maven 프로젝트 빌드
 
 ```
 Spring Boot 프로젝트 빌드
 ```
+<br/>
 
 ### 4-3. nginx 형태 배포
 
 ```
 빌드된 Vue3 프로젝트를 Nginx Server에 배포
 ```
+<br/>
 
 ### 4-4. war 형태 tomcat 배포
 
 ```
 빌드된 Spring Boot 프로젝트를 war 형태로 Tomcat Server에 배포
 ```
+<br/>
 
 ### 4-5. docker 빌드
 
 ```
 Spring Boot 프로젝트를 빌드 후 Docker Image 생성
 ```
+<br/>
 
 ### 4-6. docker 배포
 
@@ -83,18 +97,21 @@ Spring Boot 프로젝트를 빌드 후 Docker Image 생성
 - Vue3 Docker Image : Nginx Server
 - Spring Boot Docker Image : Tomcat Server에 배포
 ```
+<br/>
 
 ### 4-7. k8s(Kubernetes) 배포
 
 ```
 Kubernetes 환경에서 Docker Image를 다운로드한 후, YAML 파일을 이용하여 배포
 ```
+<br/>
 
 ### 4-8. Git Flow 배포 전략에 따른 Jenkins P/L
 
 ```
 Git Flow 배포 전략에 따라 Jenkins 파이프라인을 설정하여 자동으로 병합, 빌드, 배포를 수행
 ```
+<br/>
 
 ### 4-9. GitLab Flow 배포 전략에 따른 Jenkins P/L
 
