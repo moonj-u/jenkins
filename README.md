@@ -26,38 +26,21 @@ Jenkins는 소프트웨어 빌드, 테스트, 제공 또는 배포와 관련된 
 
 <br/>
 
-## 3. Jenkins PlugIn 방식을 사용한 빌드 및 배포
+## 3. 공통 Jenkins 작업
 
-### 3-1. Node 프로젝트 빌드
-
-```
-Vue3 프로젝트 빌드
-```
-1. Plugin 설치
+- [Job 생성 방법](Docs/job-create.md)
+- [Plugin 설치 방법](Docs/plugin-install.md)
+- GitLab Connection 설정 방법
 
 <br/>
 
-### 3-2. Maven 프로젝트 빌드
-
-```
-Spring Boot 프로젝트 빌드
-```
-
-<br/>
-
-## 4. Jenkins P/L 방식을 사용한 빌드 및 배포
+## 4. Jenkins PlugIn 방식을 사용한 빌드 및 배포
 
 ### 4-1. Node 프로젝트 빌드
 
 ```
 Vue3 프로젝트 빌드
-
-필요한 PlugIn
-- GitLab
 ```
-1. 새로운 Item에서 Pipeline을 생성한다.
-2. GitLab Connection 설정
-3. [pipeline](jenkins/pipeline/gitlabflow-pipeline.md)
 
 <br/>
 
@@ -66,30 +49,55 @@ Vue3 프로젝트 빌드
 ```
 Spring Boot 프로젝트 빌드
 ```
+
 <br/>
 
-### 4-3. nginx 형태 배포
+## 5. Jenkins P/L 방식을 사용한 빌드 및 배포
+
+### 5-1. Node 프로젝트 빌드
+
+```
+Vue3 프로젝트 빌드
+
+필요한 PlugIn
+- GitLab
+```
+
+1. Job 생성
+2. GitLab Connection 설정
+3. [pipeline](pipeline/vue-build-pipeline.md) 설정
+
+<br/>
+
+### 5-2. Maven 프로젝트 빌드
+
+```
+Spring Boot 프로젝트 빌드
+```
+<br/>
+
+### 5-3. nginx 형태 배포
 
 ```
 빌드된 Vue3 프로젝트를 Nginx Server에 배포
 ```
 <br/>
 
-### 4-4. war 형태 tomcat 배포
+### 5-4. war 형태 tomcat 배포
 
 ```
 빌드된 Spring Boot 프로젝트를 war 형태로 Tomcat Server에 배포
 ```
 <br/>
 
-### 4-5. docker 빌드
+### 5-5. docker 빌드
 
 ```
 Spring Boot 프로젝트를 빌드 후 Docker Image 생성
 ```
 <br/>
 
-### 4-6. docker 배포
+### 5-6. docker 배포
 
 ```
 생성된 Docker Image를 각 Server에 배포
@@ -99,21 +107,21 @@ Spring Boot 프로젝트를 빌드 후 Docker Image 생성
 ```
 <br/>
 
-### 4-7. k8s(Kubernetes) 배포
+### 5-7. k8s(Kubernetes) 배포
 
 ```
 Kubernetes 환경에서 Docker Image를 다운로드한 후, YAML 파일을 이용하여 배포
 ```
 <br/>
 
-### 4-8. Git Flow 배포 전략에 따른 Jenkins P/L
+### 5-8. Git Flow 배포 전략에 따른 Jenkins P/L
 
 ```
 Git Flow 배포 전략에 따라 Jenkins 파이프라인을 설정하여 자동으로 병합, 빌드, 배포를 수행
 ```
 <br/>
 
-### 4-9. GitLab Flow 배포 전략에 따른 Jenkins P/L
+### 5-9. GitLab Flow 배포 전략에 따른 Jenkins P/L
 
 ```
 GitLab Flow 배포 전략에 따라 Webhook을 이용하여 Jenkins 파이프라인을 설정하고, 자동으로 병합 및 빌드를 수행
