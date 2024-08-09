@@ -1,4 +1,4 @@
-# vue-build-pipeline
+# Jenkins Vue3 프로젝트 빌드 파이프라인
 
 ```groovy
 pipeline {
