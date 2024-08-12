@@ -71,7 +71,7 @@ Jenkins Pipeline을 이용하여 Vue3 프로젝트를 빌드하고 배포하는 
 - 작업할 디렉터리로 이동한 후, 해당 디렉터리에 'vite'를 설치합니다.
 - 'npm run build' 명령어를 통해 프로젝트를 빌드 합니다.
 
-> **자세한 사항은 [Vue3 Build Pipeline 구성 파일](pipeline/vue-build-pipeline)을 참고하세요.**
+> **자세한 사항은 [Vue3 Build Pipeline 구성 파일](pipeline/vue-build-pipeline.md)을 참고하세요.**
 
 <br/>
 
