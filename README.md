@@ -36,7 +36,7 @@ Jenkins는 소프트웨어 빌드, 테스트, 제공 또는 배포와 관련된 
 
 <br/>
 
-## 4. 공통 PlugIn
+## 4. 공통 PlugIn Install
 
 - [Git Plugin](https://plugins.jenkins.io/git/)
 - [GitLab Plugin](https://plugins.jenkins.io/gitlab-plugin/)
@@ -192,9 +192,9 @@ Spring Boot, Vue3 프로젝트 빌드 및 Docker Image 생성
 
 1. 프로젝트 빌드
 
-- Spring Boot를 빌드 : [6-2. Gradle 프로젝트 빌드](#6-2. Gradle 프로젝트 빌드)와 동일하게 진행됩니다.
+- Spring Boot를 빌드 : [6-2. Gradle 프로젝트 빌드](#6-2-gradle-프로젝트-빌드)와 동일하게 진행됩니다.
 
-- Vue3 프로젝트 빌드 : [6-1. Node 프로젝트 빌드](#6-1. Node 프로젝트 빌드)와 동일하게 진행됩니다.
+- Vue3 프로젝트 빌드 : [6-1. Node 프로젝트 빌드](#6-1-node-프로젝트-빌드)와 동일하게 진행됩니다.
 
 2. Docker Image 생성
 
