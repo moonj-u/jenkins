@@ -36,9 +36,17 @@ Jenkins는 소프트웨어 빌드, 테스트, 제공 또는 배포와 관련된 
 
 <br/>
 
-## 4. Jenkins PlugIn 방식을 사용한 빌드 및 배포
+## 4. 공통 PlugIn
 
-### 4-1. Node 프로젝트 빌드
+- [Git Plugin](https://plugins.jenkins.io/git/)
+- [GitLab Plugin](https://plugins.jenkins.io/gitlab-plugin/)
+- [Pipeline Plugin](https://github.com/jenkinsci/workflow-aggregator-plugin)
+
+<br/>
+
+## 5. Jenkins PlugIn 방식을 사용한 빌드 및 배포
+
+### 5-1. Node 프로젝트 빌드
 
 ```
 Vue3 프로젝트 빌드
@@ -46,7 +54,7 @@ Vue3 프로젝트 빌드
 
 <br/>
 
-### 4-2. Maven 프로젝트 빌드
+### 5-2. Maven 프로젝트 빌드
 
 ```
 Spring Boot 프로젝트 빌드
@@ -54,17 +62,22 @@ Spring Boot 프로젝트 빌드
 
 <br/>
 
-## 5. Jenkins P/L 방식을 사용한 빌드 및 배포
+## 6. Jenkins P/L 방식을 사용한 빌드 및 배포
 
-### 5-1. Node 프로젝트 빌드
+### 6-1. Node 프로젝트 빌드
 
 ```
-Jenkins Pipeline을 이용하여 Vue3 프로젝트를 빌드하고 배포하는 방법
+Vue3 프로젝트 빌드
 ```
+
+#### 필요 PlugIn
+
+1. [NodeJS Plugin](https://plugins.jenkins.io/nodejs/)
+
 #### Jenkins Pipeline 구성
 
 1. 소스 코드 Clone
-- GitLab 저장소에서 main 브랜치를 Clone 합니다.
+- 작업할 디렉토리를 설정한 후, GitLab 저장소에서 main 브랜치를 Clone 합니다.
 - GitLab에 대한 인증 정보는 미리 설정해둔 Credentials의 자격 증명을 이용하여 접근합니다.
 
 2. 프로젝트 빌드
@@ -75,35 +88,79 @@ Jenkins Pipeline을 이용하여 Vue3 프로젝트를 빌드하고 배포하는 
 
 <br/>
 
-### 5-2. Maven 프로젝트 빌드
+### 6-2. Gradle 프로젝트 빌드
 
 ```
 Spring Boot 프로젝트 빌드
 ```
+
+#### 필요 Plugin
+
+1. [Gradle Plugin](https://plugins.jenkins.io/gradle/)
+
+#### Jenkins Pipeline 구성
+
+1. 소스 코드 Clone
+- 작업할 디렉토리를 설정한 후, GitLab 저장소에서 master 브랜치를 Clone 합니다.
+- GitLab에 대한 인증 정보는 미리 설정해둔 Credentials의 자격 증명을 이용하여 접근합니다.
+
+2. 프로젝트 빌드
+- 작업할 디렉터리로 이동한 후 'gradle build' 명령어를 통해 프로젝트를 빌드 합니다. 
+
+> **자세한 사항은 [Spring Boot Build Pipeline 구성 파일](pipeline/boot-build-pipeline.md)을 참고하세요.**
+
 <br/>
 
-### 5-3. nginx 형태 배포
+### 6-3. nginx 형태 배포
 
 ```
 빌드된 Vue3 프로젝트를 Nginx Server에 배포
 ```
+
+#### 필요 Plugin
+
+1. [SSH Agent Plugin](https://plugins.jenkins.io/ssh-agent/)
+
+#### Jenkins Pipeline 구성
+
+1. 환경 변수 설정
+
+- 빌드 된 파일이 위치한 디렉터리와 Nginx 서버에서 파일을 저장할 디렉터리를 환경 변수로 설정합니다.
+
+2. 파일 전송
+
+- sshagent 블록을 사용하여 Jenkins에서 설정한 SSH키를 이용해 원격 서버에 인증합니다.
+- scp 명령어를 사용하여 dist 폴더를 Nginx 서버에서 파일을 저장할 디렉터리로 전송합니다.
+
+> **자세한 사항은 [Vue3 Deploy Pipeline 구성 파일](pipeline/vue-deploy-pipeline.md)을 참고하세요.**
+
 <br/>
 
-### 5-4. war 형태 tomcat 배포
+### 6-4. war 형태 tomcat 배포
 
 ```
 빌드된 Spring Boot 프로젝트를 war 형태로 Tomcat Server에 배포
 ```
+
+#### 필요 Plugin
+
+#### Jenkins Pipeline 구성
+
 <br/>
 
-### 5-5. docker 빌드
+### 6-5. docker 빌드
 
 ```
 Spring Boot 프로젝트를 빌드 후 Docker Image 생성
 ```
+
+#### 필요 Plugin
+
+#### Jenkins Pipeline 구성
+
 <br/>
 
-### 5-6. docker 배포
+### 6-6. docker 배포
 
 ```
 생성된 Docker Image를 각 Server에 배포
@@ -111,24 +168,43 @@ Spring Boot 프로젝트를 빌드 후 Docker Image 생성
 - Vue3 Docker Image : Nginx Server
 - Spring Boot Docker Image : Tomcat Server에 배포
 ```
+
+#### 필요 Plugin
+
+#### Jenkins Pipeline 구성
+
 <br/>
 
-### 5-7. k8s(Kubernetes) 배포
+### 6-7. k8s(Kubernetes) 배포
 
 ```
 Kubernetes 환경에서 Docker Image를 다운로드한 후, YAML 파일을 이용하여 배포
 ```
+
+#### 필요 Plugin
+
+#### Jenkins Pipeline 구성
+
 <br/>
 
-### 5-8. Git Flow 배포 전략에 따른 Jenkins P/L
+### 6-8. Git Flow 배포 전략에 따른 Jenkins P/L
 
 ```
 Git Flow 배포 전략에 따라 Jenkins 파이프라인을 설정하여 자동으로 병합, 빌드, 배포를 수행
 ```
+
+#### 필요 Plugin
+
+#### Jenkins Pipeline 구성
+
 <br/>
 
-### 5-9. GitLab Flow 배포 전략에 따른 Jenkins P/L
+### 6-9. GitLab Flow 배포 전략에 따른 Jenkins P/L
 
 ```
 GitLab Flow 배포 전략에 따라 Webhook을 이용하여 Jenkins 파이프라인을 설정하고, 자동으로 병합 및 빌드를 수행
 ```
+
+#### 필요 Plugin
+
+#### Jenkins Pipeline 구성
