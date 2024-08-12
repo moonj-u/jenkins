@@ -327,4 +327,24 @@ GitLab Flow 배포 전략에 따라 Webhook을 이용하여 Jenkins 파이프라
 
 #### 필요 Plugin
 
+1. [Gradle Plugin](https://plugins.jenkins.io/gradle/)
+
 #### Jenkins Pipeline 구성
+
+1. Merge Request Comment Job
+
+- Webhook 설정
+
+- GitLab에서 MR 요청 시 Webhook을 통해 Source 브랜치와 Target 브랜치를 병합 후 단위 테스트를 진행합니다.
+
+- 단위 테스트 성공 시 Merge Request에 Comment를 추가하는 작업이 실행됩니다.
+
+> **자세한 사항은 [Merge Request Comment Pipeline 구성 파일](pipeline/mr-comment-pipeline.md)을 참고하세요.**
+
+<br/>
+
+2. Pre-Production Merge Request Merge Job
+
+- 
+
+> **자세한 사항은 [GitLab Flow Merge Pipeline 구성 파일](pipeline/gitlabFlow-merge-pipeline.md)을 참고하세요.**
