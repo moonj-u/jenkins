@@ -144,7 +144,24 @@ Spring Boot 프로젝트 빌드
 
 #### 필요 Plugin
 
+1. [SSH Agent Plugin](https://plugins.jenkins.io/ssh-agent/)
+
 #### Jenkins Pipeline 구성
+
+1. 환경 변수 설정
+
+- 빌드 된 war 파일의 위치와 Tomcat 서버에서 webapps 폴더의 위치를 환경 변수로 설정합니다.
+
+2. 파일 전송
+
+- sshagent 블록을 사용하여 Jenkins에서 설정한 SSH키를 이용해 원격 서버에 인증합니다.
+- scp 명령어를 사용하여 war 파일을 Tomcat 서버에 webapps 폴더로 전송합니다.
+
+3. war 파일 실행
+
+- SSH를 통해 Tomcat 서버에 접속하고, Tomcat 서버의 bin 디렉터리로 이동하여 startup.sh 스크립트를 실행하여 Tomcat 서버를 시작합니다.
+
+> **자세한 사항은 [Spring Boot Deploy Pipeline 구성 파일](pipeline/boot-deploy-pipeline.md)을 참고하세요.**
 
 <br/>
 
