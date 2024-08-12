@@ -1,7 +1,6 @@
 # Spring Boot Build Pipeline
 
 ```groovy
-
 pipeline {
     agent any
     
@@ -34,5 +33,4 @@ pipeline {
         }
     }
 }
-
 ```
