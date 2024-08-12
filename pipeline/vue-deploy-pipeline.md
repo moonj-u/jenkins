@@ -1,7 +1,6 @@
 # Vue3 프로젝트 nginx 형태 배포 Pipeline
 
 ```groovy
-
 pipeline {
     agent any
     
@@ -22,5 +21,4 @@ pipeline {
         }
     }
 }
-
 ```
