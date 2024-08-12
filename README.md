@@ -241,6 +241,8 @@ Spring Boot, Vue3 프로젝트 빌드 및 Docker Image 생성
 
 ```
 Kubernetes 환경에서 Docker Image를 다운로드한 후, YAML 파일을 이용하여 배포
+
+Spring Boot, Vue3의 Jenkins Pipeline 구성이 동일
 ```
 
 #### 필요 Plugin
@@ -249,8 +251,19 @@ Kubernetes 환경에서 Docker Image를 다운로드한 후, YAML 파일을 이�
 
 #### Jenkins Pipeline 구성
 
-1. 
+1. 환경 변수 설정
 
+- 배포에 필요한 Kubernetes YAML 파일의 경로와 Docker Hub 인증 정보를 환경 변수로 설정합니다.
+
+2. Docker Image 다운로드
+
+- sshagent 블록을 사용하여 Jenkins에서 설정한 SSH 키를 이용해 원격 서버에 인증 및 접속합니다.
+
+- `docker login` 명령어를 사용해 Docker Hub에 로그인하고, `docker pull` 명령어로 해당 Docker 이미지를 다운로드합니다.
+
+3. 원격 서버에 전송한 Kubernetes YAML 파일을 이용하여 `kubectl apply` 명령어로 Kubernetes 클러스터에 배포를 진행합니다.
+
+> **자세한 사항은 [K8s Deploy Pipeline 구성 파일](pipeline/k8s-deploy-pipeline.md)을 참고하세요.**
 
 <br/>
 
