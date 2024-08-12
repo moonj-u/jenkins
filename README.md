@@ -30,7 +30,9 @@ Jenkins는 소프트웨어 빌드, 테스트, 제공 또는 배포와 관련된 
 
 - [Job 생성 방법](docs/job-create.md)
 - [Plugin 설치 방법](docs/plugin-install.md)
-- GitLab Connection 설정 방법
+- [Tools 설정 방법](docs/tools.md)
+- [Credentials 설정 방법](docs/credentials.md)
+- [GitLab Connection 설정 방법](docs/gitlab-connection.md)
 
 <br/>
 
@@ -57,15 +59,19 @@ Spring Boot 프로젝트 빌드
 ### 5-1. Node 프로젝트 빌드
 
 ```
-Vue3 프로젝트 빌드
-
-필요한 PlugIn
-- GitLab
+Jenkins Pipeline을 이용하여 Vue3 프로젝트를 빌드하고 배포하는 방법
 ```
+#### Jenkins Pipeline 구성
 
-1. Job 생성
-2. GitLab Connection 설정
-3. [pipeline](docs/vue-build-pipeline.md) 설정
+1. 소스 코드 Clone
+- GitLab 저장소에서 main 브랜치를 Clone 합니다.
+- GitLab에 대한 인증 정보는 미리 설정해둔 Credentials의 자격 증명을 이용하여 접근합니다.
+
+2. 프로젝트 빌드
+- 작업할 디렉터리로 이동한 후, 해당 디렉터리에 'vite'를 설치합니다.
+- 'npm run build' 명령어를 통해 프로젝트를 빌드 합니다.
+
+> **자세한 사항은 [Vue3 Build Pipeline 구성 파일](pipeline/vue-build-pipeline)을 참고하세요.**
 
 <br/>
 
