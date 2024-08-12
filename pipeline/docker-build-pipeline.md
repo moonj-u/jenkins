@@ -34,6 +34,7 @@ pipeline {
     }
 }
 ```
+<br/>
 
 # Vue3 프로젝트 빌드 및 Docker Image 생성 Pipeline
 
