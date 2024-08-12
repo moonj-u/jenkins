@@ -5,7 +5,7 @@ pipeline {
     agent any
     
     tools {
-        gradle('mj-boot-gradle')
+        nodejs('mj-vue-nodeJS')
     }
     
     stages {
@@ -25,7 +25,8 @@ pipeline {
             steps {
                 dir('frontend') {
                     sh '''
-                        gradle npmDevBuild
+                        npm install vite --save-dev
+                        npm run build
                     '''
                 }
             }
