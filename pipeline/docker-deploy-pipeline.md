@@ -43,6 +43,8 @@ pipeline {
 }
 ```
 
+<br/>
+
 # Vue3 프로젝트 Docker Image 배포 Pipeline
 
 ```groovy
