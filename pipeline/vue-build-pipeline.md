@@ -1,5 +1,6 @@
 # Vue3 build pipeline
 
+```groovy
 pipeline {
     agent any
     
@@ -31,3 +32,4 @@ pipeline {
         }
     }
 }
+```
