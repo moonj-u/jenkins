@@ -270,12 +270,39 @@ Spring Boot, Vue3의 Jenkins Pipeline 구성이 동일
 ### 6-8. Git Flow 배포 전략에 따른 Jenkins P/L
 
 ```
-Git Flow 배포 전략에 따라 Jenkins 파이프라인을 설정하여 자동으로 병합, 빌드, 배포를 수행
+Git Flow 배포 전략에 따라 Jenkins 파이프라인을 설정하여 자동으로 병합 및 빌드 수행
 ```
 
 #### 필요 Plugin
 
+1. [Gradle Plugin](https://plugins.jenkins.io/gradle/)
+
+2. [Git Parameter Plugin](https://plugins.jenkins.io/git-parameter/)
+
 #### Jenkins Pipeline 구성
+
+1. 매개변수 설정
+
+- Boolean Parameter
+    1. master 브랜치 작업을 하기 위한 파라미터로 클릭 시 해당 스테이지가 실행됩니다.
+
+- String Parameter
+    1. BRANCH_PATTERN
+        - 작업을 시작할 브랜치의 이름을 지정합니다.
+    2. MERGE_MESSAGE
+        - 브랜치를 병합할 때 사용될 커밋 메시지를 지정합니다.
+    3. TAG
+        - 태그할 버전명 지정
+        - 주로 릴리스 버전을 표시하는 데 사용됩니다.
+        - 릴리스 브랜치를 master 브랜치와 병합 시 사용되며, 병합 후 master 브랜치를 빌드하고 Docker Image 생성 시 해당 태그가 사용됩니다.
+
+2. Git Checkout
+
+- BRANCH_PATTERN 파라미터를 사용하여 작업할 브랜치를 선택하고, 해당 브랜치를 체크아웃합니다.
+
+3. 
+
+> **자세한 사항은 [Git Flow Pipeline 구성 파일](pipeline/gitflow-pipeline.md)을 참고하세요.**
 
 <br/>
 
