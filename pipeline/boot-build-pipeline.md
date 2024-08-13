@@ -112,7 +112,6 @@ pipeline {
                 dir('working-directory') {
                     sh '''
                         gradle build
-                        gradle jib
                     '''
                 }
             }
