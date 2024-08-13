@@ -331,20 +331,52 @@ GitLab Flow 배포 전략에 따라 Webhook을 이용하여 Jenkins 파이프라
 
 #### Jenkins Pipeline 구성
 
-1. Merge Request Comment Job
+- Merge Request Comment Job
 
-- Webhook 설정
+    1. Webhook 설정
 
-- GitLab에서 MR 요청 시 Webhook을 통해 Source 브랜치와 Target 브랜치를 병합 후 단위 테스트를 진행합니다.
+        - GitLab에서 MR(Merge Request) 요청 시 Webhook을 통해 Jenkins가 트리거됩니다.
+        
+        - Jenkins 구성에서 `Opened Merge Request Events`를 체크합니다.
 
-- 단위 테스트 성공 시 Merge Request에 Comment를 추가하는 작업이 실행됩니다.
+    2. 병합 및 단위 테스트
+    
+        - GitLab에서 MR 요청 시 Webhook에 의해 트리거된 Jenkins 파이프라인에서 Source 브랜치와 Target 브랜치를 병합 후 단위 테스트를 진행합니다.
+
+    3. MR(Merge Request)에 Comment 추가
+    
+        - 단위 테스트 성공 시 Merge Request에 Comment를 추가하는 작업이 실행됩니다.
 
 > **자세한 사항은 [Merge Request Comment Pipeline 구성 파일](pipeline/mr-comment-pipeline.md)을 참고하세요.**
 
 <br/>
 
-2. Pre-Production Merge Request Merge Job
+- Pre-Production Merge Request Merge Job
 
-- 
+    1. Webhook 설정
+
+        - Webhook을 통해 GitLab에서 MR(Merge Request) 승인 시 Jenkins 파이프라인이 트리거 됩니다.
+
+        - Jenkins 구성에서 `Accepted Merge Request Events`를 체크합니다.
+
+    2. 환경 변수 설정
+
+        - GitLab PlugIn에 정의된 변수를 활용해서 Source 브랜치와 Target 브랜치, 그리고 Milesotone의 Iid를 환경 변수로 설정합니다.
+
+        - GitLab API 호출에 필요한 private access token을 환경 변수로 설정합니다.
+
+    3. Milesotone Title 확인 및 브랜치 체크아웃
+
+        - GitLab에서 code reviewer가 승인 시 Webhook을 통해 전달된 정보로 Milesotone Title을 변수로 설정합니다.
+
+        - Milesotone Title 확인 후 정보가 있을 경우 Target 브랜치에 체크아웃 합니다.
+
+        - pre-production 브랜치로 체크아웃 후 Target 브랜치와 Milesotone의 Title을 이용하여 태그를 생성합니다.
+
+    4. 업로드 및 Revert
+
+        - 성공 시 pre-production 브랜치와 태그를 원격 저장소에 업로드합니다.
+
+        - 실패 시 Target 브랜치로 체크아웃하여 revert를 진행 후 원격 저장소에 업로드합니다.
 
 > **자세한 사항은 [GitLab Flow Merge Pipeline 구성 파일](pipeline/gitlabFlow-merge-pipeline.md)을 참고하세요.**
