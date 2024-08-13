@@ -12,6 +12,8 @@
     }
 ```
 
+<br>
+
 2. dir()
 
 - 작업할 디렉터리를 지정합니다.
@@ -26,6 +28,8 @@
     }
 ```
 
+<br>
+
 3. git branch
 
 - 설정한 브랜치를 클론합니다.
@@ -33,6 +37,8 @@
 ```groovy
 git branch: '브랜치명'
 ```
+
+<br>
 
 4. changelog(선택 사항)
 
@@ -42,6 +48,8 @@ git branch: '브랜치명'
 changelog: false
 ```
 
+<br>
+
 5. credentialsId: 'credentials-id'
 
 - 저장소 접근을 위한 자격 증명 ID를 설정합니다.
@@ -49,6 +57,8 @@ changelog: false
 ```groovy
 credentialsId: '자격 증명 ID'
 ```
+
+<br>
 
 6. poll(선택 사항)
 
@@ -59,6 +69,8 @@ credentialsId: '자격 증명 ID'
 ```groovy
 poll: false
 ```
+
+<br>
 
 7. url
 
