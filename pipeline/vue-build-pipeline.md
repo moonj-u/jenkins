@@ -94,7 +94,7 @@ pipeline {
         stage('vue git clone') {
             steps {
                 dir('working-directory') {
-                    git branch: 'main',
+                    git branch: '브랜치명',
                     changelog: false,
                     credentialsId: '자격 증명 ID',
                     poll: false,
