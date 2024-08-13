@@ -12,6 +12,8 @@ environment {
 }
 ```
 
+<br>
+
 2. sshagent
 
 - SSH Agent Plugin을 설치한 후, Pipeline에서 sshagent 블록을 사용하여 SSH 자격 증명을 제공합니다.
@@ -30,15 +32,21 @@ stages {
 }
 ```
 
+<br>
+
 3. scp 명령어
 
 - scp 명령어를 이용하여 dist 폴더를 Tomcat Server에 전송합니다.
 
 - `-r` 옵션을 사용하여 폴더를 배포합니다.
 
-```groovy
+```
 scp [옵션] [폴더명] [원격지_id]@[원격지_ip]:[받는 위치]
 ```
+
+<br>
+
+## 예시) 최종 Pipeline
 
 ```groovy
 pipeline {
