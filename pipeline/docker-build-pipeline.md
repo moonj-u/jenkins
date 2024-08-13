@@ -1,4 +1,86 @@
-# Spring Boot 프로젝트 빌드 및 Docker Image 생성 Pipeline
+# Spring Boot, Vue3 프로젝트 빌드 및 Docker Image 생성 Pipeline
+
+## Pipeline 설명
+
+1. tools
+
+- Jenkins가 사용할 도구의 이름을 지정합니다.
+
+```groovy
+    tools {
+        gradle('Tools Name')
+    }
+```
+
+2. dir()
+
+- 작업할 디렉터리를 지정합니다.
+
+- 지정된 디렉터리에 Git Clone 작업이 진행됩니다.
+
+```groovy
+    stage('git clone') {
+        steps {
+            dir('working-directory')
+        }
+    }
+```
+
+3. git branch
+
+- 설정한 브랜치를 클론합니다.
+
+```groovy
+git branch: '브랜치명'
+```
+
+4. changelog(선택 사항)
+
+- 변경 로그를 가져오지 않도록 설정합니다.
+
+```groovy
+changelog: false
+```
+
+5. credentialsId: 'credentials-id'
+
+- 저장소 접근을 위한 자격 증명 ID를 설정합니다.
+
+```groovy
+credentialsId: '자격 증명 ID'
+```
+
+6. poll(선택 사항)
+
+- Git 저장소의 변경 사항을 주기적으로 확인하지 않도록 설정합니다.
+
+- 해당 사항은 선택 사항이며, 해당 Pipeline에서는 주기적인 변경 사항을 확인하여 빌드할 필요가 없기 때문에 false로 설정합니다.
+
+```groovy
+poll: false
+```
+
+7. url
+
+- 클론할 원격 저장소의 URL을 지정합니다.
+
+```groovy
+url: '원격 저장소 URL'
+```
+
+8. Vue3 Pipeline에서 vite 설치
+
+- Vite는 실제 서비스에서는 필요하지 않기 때문에 `--save-dev` 옵션을 사용하여 Vite를 package.json 파일의 devDependencies 섹션에 추가합니다.
+
+- 해당 옵션을 사용하면 Vite가 개발 환경에서만 의존성으로 포함됩니다.
+
+```groovy
+npm install vite --save-dev
+```
+
+## 예시) 최종 Pipeline
+
+### Spring Boot
 
 ```groovy
 pipeline {
@@ -34,9 +116,8 @@ pipeline {
     }
 }
 ```
-<br/>
 
-# Vue3 프로젝트 빌드 및 Docker Image 생성 Pipeline
+### Vue3
 
 ```groovy
 pipeline {
