@@ -78,9 +78,9 @@ Vue3 프로젝트 빌드
 
 1. 소스 코드 Clone
 
-- 작업할 디렉토리를 설정한 후, GitLab 저장소에서 main 브랜치를 Clone 합니다.
+- 작업할 디렉터리를 설정한 후, GitLab 저장소에서 main 브랜치를 Clone 합니다.
 
-- GitLab에 대한 인증 정보는 미리 설정해둔 Credentials의 자격 증명을 이용하여 접근합니다.
+- GitLab에 대한 인증 정보는 미리 설정해둔 `Credentials의 자격 증명`을 이용하여 접근합니다.
 
 2. 프로젝트 빌드
 
@@ -106,9 +106,9 @@ Spring Boot 프로젝트 빌드
 
 1. 소스 코드 Clone
 
-- Jenkins 파이프라인에서 작업할 디렉토리를 설정한 후, GitLab 저장소에서 소스 코드를 Clone합니다.
+- Jenkins 파이프라인에서 작업할 디렉터리를 설정한 후, GitLab 저장소에서 소스 코드를 Clone 합니다.
 
-- GitLab에 대한 인증 정보는 미리 설정해둔 Credentials의 자격 증명을 이용하여 접근합니다.
+- GitLab에 대한 인증 정보는 미리 설정해둔 `Credentials의 자격 증명`을 이용하여 접근합니다.
 
 2. 프로젝트 빌드
 
@@ -136,9 +136,9 @@ Spring Boot 프로젝트 빌드
 
 2. 파일 전송
 
-- sshagent 블록을 사용하여 Jenkins에서 설정한 SSH키를 이용해 원격 서버에 인증합니다.
+- `sshagent 블록`을 사용하여 Jenkins에서 설정한 SSH 키를 이용해 원격 서버에 인증합니다.
 
-- scp 명령어를 사용하여 dist 폴더를 Nginx 서버에서 파일을 저장할 디렉터리로 전송합니다.
+- `scp 명령어`를 사용하여 dist 폴더를 Nginx 서버에서 파일을 저장할 디렉터리로 전송합니다.
 
 > **자세한 사항은 [Vue3 Deploy Pipeline 구성 파일](pipeline/vue-deploy-pipeline.md)을 참고하세요.**
 
@@ -158,13 +158,13 @@ Spring Boot 프로젝트 빌드
 
 1. 환경 변수 설정
 
-- 빌드 된 war 파일의 위치와 Tomcat 서버에서 webapps 폴더의 위치를 환경 변수로 설정합니다.
+- 빌드 된 war 파일의 위치와 Tomcat 서버에서 `webapps 폴더`의 위치를 환경 변수로 설정합니다.
 
 2. 파일 전송
 
-- sshagent 블록을 사용하여 Jenkins에서 설정한 SSH키를 이용해 원격 서버에 인증합니다.
+- `sshagent 블록`을 사용하여 Jenkins에서 설정한 SSH 키를 이용해 원격 서버에 인증합니다.
 
-- scp 명령어를 사용하여 war 파일을 Tomcat 서버에 webapps 폴더로 전송합니다.
+- `scp 명령어`를 사용하여 war 파일을 Tomcat 서버에 webapps 폴더로 전송합니다.
 
 3. war 파일 실행
 
@@ -221,7 +221,7 @@ Spring Boot, Vue3 프로젝트 빌드 및 Docker Image 생성
 
 #### Jenkins Pipeline 구성
 
-1. sshagent 블록을 사용하여 Jenkins에서 설정한 SSH 키를 이용해 원격 서버에 인증 및 접속합니다.
+1. `sshagent 블록`을 사용하여 Jenkins에서 설정한 SSH 키를 이용해 원격 서버에 인증 및 접속합니다.
 
 2. Docker Hub에 로그인합니다.
 
@@ -292,7 +292,7 @@ Git Flow 배포 전략에 따라 Jenkins 파이프라인을 설정하여 자동�
     2. MERGE_MESSAGE
         - 브랜치를 병합할 때 사용될 커밋 메시지를 지정합니다.
     3. TAG
-        - 태그할 버전명 지정
+        - 태그 할 버전 지정
         - 주로 릴리스 버전을 표시하는 데 사용됩니다.
         - 릴리스 브랜치를 master 브랜치와 병합 시 사용되며, 병합 후 master 브랜치를 빌드하고 Docker Image 생성 시 해당 태그가 사용됩니다.
 
@@ -300,7 +300,7 @@ Git Flow 배포 전략에 따라 Jenkins 파이프라인을 설정하여 자동�
 
 - BRANCH_PATTERN 파라미터를 사용하여 작업할 브랜치를 선택하고, 해당 브랜치를 체크아웃합니다.
 
-3. when 지시어를 사용하여 조건에 따라 stage가 실행되게 합니다.
+3. 각 브랜치의 작업 설명
 
 - Feature Branch 병합
     - feature 브랜치를 develop 브랜치에 병합합니다.
