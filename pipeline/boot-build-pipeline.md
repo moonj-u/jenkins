@@ -6,6 +6,8 @@
 
 - Jenkins가 사용할 도구의 이름을 지정합니다.
 
+- Tools Name은 Jenkins 관리 > Tools에서 설정한 도구의 이름입니다.
+
 ```groovy
     tools {
         gradle('Tools Name')
