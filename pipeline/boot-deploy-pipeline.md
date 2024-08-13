@@ -1,4 +1,4 @@
-# Spring Boot 프로젝트를 War 형태로 Tomcat Server 배포
+# Spring Boot 프로젝트를 War 형태로 Tomcat Server 배포 Pipeline
 
 ## Pipeline 설명
 
@@ -59,15 +59,15 @@ pipeline {
     agent any
     
     environment {
-        BACK_WAR_FILE = '/var/jenkins_home/workspace/mj-bootbuild/backend/build/libs/boot-app.war'
-        TAGET_DIR = '/home/tomcat/apache-tomcat-10.1.24/webapps'
+        BACK_WAR_FILE = '/var/jenkins_home/workspace/...'   // Jenkins Server의 war 파일 경로
+        TAGET_DIR = '/home/tomcat/apache-tomcat-10.1.24/webapps'    // Tomcat Server의 war 파일을 배포할 경로
     }
 
     stages {
         stage('boot deploy') {
             steps {
-                sshagent(credentials: ['tomcat-ssh-key']) {
-                    sh 'scp ${BACK_WAR_FILE} tomcat@192.168.0.252:${TAGET_DIR}'
+                sshagent(credentials: ['자격 증명 ID']) {
+                    sh 'scp ${BACK_WAR_FILE} tomcat@[원격지_ip]:${TAGET_DIR}'
                 }
             }
         }
@@ -75,9 +75,9 @@ pipeline {
         stage('run') {
             steps {
                 script {
-                    sshagent(credentials: ['tomcat-ssh-key']) {
+                    sshagent(credentials: ['자격 증명 ID']) {
                         sh '''
-                            ssh tomcat@192.168.0.252 "
+                            ssh tomcat@[원격지_ip] "
                             export JAVA_HOME=/home/tomcat/amazon-corretto-17.0.11.9.1-linux-x64
                             export PATH=$JAVA_HOME/bin:$PATH
                             cd /home/tomcat/apache-tomcat-10.1.24/bin
@@ -92,3 +92,5 @@ pipeline {
     }
 }
 ```
+
+>**참고** : 파일이나 폴더의 경로는 실제 환경에 따라 다를 수 있습니다.
