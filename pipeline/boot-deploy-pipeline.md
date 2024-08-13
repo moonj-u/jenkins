@@ -12,6 +12,8 @@ environment {
 }
 ```
 
+<br>
+
 2. sshagent
 
 - SSH Agent Plugin을 설치한 후, Pipeline에서 sshagent 블록을 사용하여 SSH 자격 증명을 제공합니다.
@@ -30,15 +32,19 @@ stages {
 }
 ```
 
+<br>
+
 3. scp 명령어
 
 - scp 명령어를 이용하여 war 파일을 Tomcat Server에 전송합니다.
 
 - 해당 Pipeline에서는 옵션을 사용하지 않습니다.
 
-```groovy
+```
 scp [옵션] [파일명] [원격지_id]@[원격지_ip]:[받는 위치]
 ```
+
+<br>
 
 4. ssh 명령어
 
@@ -46,7 +52,7 @@ scp [옵션] [파일명] [원격지_id]@[원격지_ip]:[받는 위치]
 
 - 서버에 접속 후 스크립트를 실행하기 위해 `ssh [원격지_id]@[원격지_ip]` 뒤에 `""(큰따옴표)`를 사용합니다.
 
-```groovy
+```
 ssh [원격지_id]@[원격지_ip] "명령어1, 명령어2, 명령어3, ..."
 ```
 
