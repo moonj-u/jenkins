@@ -6,11 +6,15 @@
 
 - Jenkins가 사용할 도구의 이름을 지정합니다.
 
+- Tools Name은 Jenkins 관리 > Tools에서 설정한 도구의 이름입니다.
+
 ```groovy
     tools {
         gradle('Tools Name')
     }
 ```
+
+<br>
 
 2. dir()
 
@@ -26,29 +30,37 @@
     }
 ```
 
+<br>
+
 3. git branch
 
 - 설정한 브랜치를 클론합니다.
 
-```groovy
+```
 git branch: '브랜치명'
 ```
+
+<br>
 
 4. changelog(선택 사항)
 
 - 변경 로그를 가져오지 않도록 설정합니다.
 
-```groovy
+```
 changelog: false
 ```
+
+<br>
 
 5. credentialsId: 'credentials-id'
 
 - 저장소 접근을 위한 자격 증명 ID를 설정합니다.
 
-```groovy
+```
 credentialsId: '자격 증명 ID'
 ```
+
+<br>
 
 6. poll(선택 사항)
 
@@ -56,17 +68,21 @@ credentialsId: '자격 증명 ID'
 
 - 해당 사항은 선택 사항이며, 해당 Pipeline에서는 주기적인 변경 사항을 확인하여 빌드할 필요가 없기 때문에 false로 설정합니다.
 
-```groovy
+```
 poll: false
 ```
+
+<br>
 
 7. url
 
 - 클론할 원격 저장소의 URL을 지정합니다.
 
-```groovy
+```
 url: '원격 저장소 URL'
 ```
+
+<br>
 
 8. Vue3 Pipeline에서 vite 설치
 
@@ -74,7 +90,7 @@ url: '원격 저장소 URL'
 
 - 해당 옵션을 사용하면 Vite가 개발 환경에서만 의존성으로 포함됩니다.
 
-```groovy
+```
 npm install vite --save-dev
 ```
 
