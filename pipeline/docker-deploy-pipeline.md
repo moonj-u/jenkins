@@ -57,7 +57,7 @@ stages {
     - Docker의 기본 퍼블릭 레지스트리인 `docker.io`에서 다운로드하려는 Docker 이미지의 이름과 TAG를 지정하여 `docker pull` 명령어로 이미지를 다운로드합니다.
 
 >**참고** <br/>
->[Docker Login 공식 문서](https://docs.docker.com/reference/cli/docker/login/#credential-helpers) <br/>
+>[Docker Login 공식 문서](https://docs.docker.com/reference/cli/docker/login) <br/>
 >[Jenkins 자격 증명 처리 공식 문서](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/#usernames-and-passwords)
 
 <br/>
