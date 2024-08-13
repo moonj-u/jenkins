@@ -6,6 +6,8 @@
 
 - Jenkins가 사용할 도구의 이름을 지정합니다.
 
+- Tools Name은 Jenkins 관리 > Tools에서 설정한 도구의 이름입니다.
+
 ```groovy
     tools {
         gradle('Tools Name')
@@ -89,25 +91,25 @@ pipeline {
     agent any
     
     tools {
-        gradle('mj-boot-gradle')
+        gradle('Tools Name')
     }
     
     stages {
         stage('git clone') {
             steps {
-                dir('backend') {
-                        git branch: 'master', 
+                dir('working-directory') {
+                        git branch: '브랜치명', 
                         changelog: false, 
-                        credentialsId: 'mj.lee',
+                        credentialsId: '자격 증명 ID',
                         poll: false,
-                        url: 'https://gitlab.magnum.i234.me/study/backendtomcat.git'
+                        url: '원격 저장소 URL'
                 }
             }
         }
         
         stage('boot build') {
             steps {
-                dir('backend') {
+                dir('working-directory') {
                     sh '''
                         gradle build
                         gradle jib
@@ -126,26 +128,26 @@ pipeline {
     agent any
     
     tools {
-        gradle('mj-boot-gradle')
-        nodejs('mj-vue-nodeJS')
+        gradle('Tools Name')
+        nodejs('Tools Name')
     }
     
     stages {
         stage('vue git clone') {
             steps {
-                dir('frontend') {
-                    git branch: 'main',
+                dir('working-directory') {
+                    git branch: '브랜치명',
                     changelog: false,
-                    credentialsId: 'mj.lee',
+                    credentialsId: '자격 증명 ID',
                     poll: false,
-                    url: 'https://gitlab.magnum.i234.me/study/frontend-vue-tomcat.git' 
+                    url: '원격 저장소 URL' 
                 }
             }
         }
         
         stage('vue build') {
             steps {
-                dir('frontend') {
+                dir('working-directory') {
                     sh '''
                         npm install vite --save-dev
                         npm run build
