@@ -2,13 +2,13 @@
 
 ## 목차
 
-1. [tools](#1-tools)
+1. [Tools](#1-tools)
 2. [git clone](#2-git-clone)
 3. [예시) 최종 Pipeline](#예시-최종-pipeline)
 
 ## Pipeline 설명
 
-#### 1. tools
+#### 1. Tools
 
 - Jenkins가 사용할 도구의 이름을 지정합니다.
 
@@ -42,7 +42,7 @@
 
 - git branch
 
-    - 설정한 브랜치를 클론합니다.
+    - 설정한 브랜치를 Clone 합니다.
 
     ```groovy
     git branch: '브랜치명'
