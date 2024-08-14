@@ -10,7 +10,7 @@
 
 #### 1. 환경 변수 설정
 
-- `Jenkins Server의 war 파일의 경로`와 `Nginx Server의 dist 폴더를 배포할 경로`를 environment 블록 내에 환경 변수로 설정합니다.
+- `Jenkins Server의 dist 폴더의 경로`와 `Nginx Server의 dist 폴더를 배포할 경로`를 environment 블록 내에 환경 변수로 설정합니다.
 
 ```groovy
 environment {
