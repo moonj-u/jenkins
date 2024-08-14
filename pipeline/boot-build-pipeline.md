@@ -3,7 +3,7 @@
 ## 목차
 
 1. [Tools](#1-tools)
-2. [git clone](#2-git-clone)
+2. [Git Clone](#2-git-clone)
 3. [예시) 최종 Pipeline](#예시-최종-pipeline)
 
 ## Pipeline 설명
@@ -22,7 +22,7 @@
 
 <br>
 
-#### 2. git clone
+#### 2. Git Clone
 
 - dir()
 
