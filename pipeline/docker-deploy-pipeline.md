@@ -1,60 +1,71 @@
 # Spring Boot, Vue3 프로젝트 Docker Image 배포 Pipeline
 
+## 목차
+
+1. [환경 변수 설정](#1-환경-변수-설정)
+2. [Docker Hub 로그인 및 Docker Image 다운로드](#2-docker-hub-로그인-및-docker-image-다운로드)
+3. [Docker 컨테이너 실행](#3-docker-컨테이너-실행)
+4. [예시) 최종 Pipeline](#예시-최종-pipeline)
+
 ## Pipeline 설명
 
-1. environment
+#### 1. 환경 변수 설정
 
-- 미리 설정 해둔 `username with password` 자격 유형의 자격 증명을 환경 변수로 설정합니다.
+- environment
 
-```groovy
-environment {
-    DOCKERHUB_CREDENTIALS = credentials('자격 증명 ID')
-}
-```
+    - 미리 설정 해둔 `username with password` 자격 유형의 자격 증명을 환경 변수로 설정합니다.
+
+    ```groovy
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('자격 증명 ID')
+    }
+    ```
 
 <br/>
 
-2. sshagent
+### 2. Docker Hub 로그인 및 Docker Image 다운로드
 
-- SSH Agent Plugin을 설치한 후, Pipeline에서 sshagent 블록을 사용하여 SSH 자격 증명을 제공합니다.
+- sshagent
 
-- sshagent 블록은 지정된 SSH 자격 증명을 사용하여 블록 내에서 실행되는 모든 셸 명령에 SSH 키를 제공할 수 있습니다.
+    - SSH Agent Plugin을 설치한 후, Pipeline에서 sshagent 블록을 사용하여 SSH 자격 증명을 제공합니다.
 
-```groovy
-stages {
-    stage('') {
-        steps {
-            sshagent(credentials: ['자격 증명 ID']) {
-                //
+    - sshagent 블록은 지정된 SSH 자격 증명을 사용하여 블록 내에서 실행되는 모든 셸 명령에 SSH 키를 제공할 수 있습니다.
+
+    ```groovy
+    stages {
+        stage('') {
+            steps {
+                sshagent(credentials: ['자격 증명 ID']) {
+                    //
+                }
             }
         }
     }
-}
-```
+    ```
 
 <br/>
 
-3. Docker Hub 로그인
+- Docker Hub 로그인
 
-- `echo $DOCKERHUB_CREDENTIALS_PSW`
+    - `echo $DOCKERHUB_CREDENTIALS_PSW`
 
-    - 환경 변수에 저장된 Docker Hub 비밀번호를 출력합니다.
+        - 환경 변수에 저장된 Docker Hub 비밀번호를 출력합니다.
 
-    - 비밀번호는 실제로 log에 출력되지 않고, `docker login` 명령어의 표준 입력으로 전달됩니다.
+        - 비밀번호는 실제로 log에 출력되지 않고, `docker login` 명령어의 표준 입력으로 전달됩니다.
 
-- `docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin`
+    - `docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin`
 
-    - `-u` 옵션에서 Docker Hub 사용자 이름을 지정합니다.
+        - `-u` 옵션에서 Docker Hub 사용자 이름을 지정합니다.
 
-    - `--password-stdin` 옵션을 사용하여 비밀번호를 표준 입력(stdin)에서 읽어오는데, 해당 Pipeline에서는 `echo` 명령어로 전달된 비밀번호를 사용합니다.
+        - `--password-stdin` 옵션을 사용하여 비밀번호를 표준 입력(stdin)에서 읽어오는데, 해당 Pipeline에서는 `echo` 명령어로 전달된 비밀번호를 사용합니다.
 
-- &&
-    
-    - Docker Hub 로그인 후의 작업을 위해 해당 연산자를 사용합니다.
+    - &&
+        
+        - Docker Hub 로그인 후의 작업을 위해 해당 연산자를 사용합니다.
 
-- `docker pull docker.io/[Docker Hub ID]/[Docker Image]:[TAG]`
+    - `docker pull docker.io/[Docker Hub ID]/[Docker Image]:[TAG]`
 
-    - Docker의 기본 퍼블릭 레지스트리인 `docker.io`에서 다운로드하려는 Docker 이미지의 이름과 TAG를 지정하여 `docker pull` 명령어로 이미지를 다운로드합니다.
+        - Docker의 기본 퍼블릭 레지스트리인 `docker.io`에서 다운로드하려는 Docker 이미지의 이름과 TAG를 지정하여 `docker pull` 명령어로 이미지를 다운로드합니다.
 
 >**참고** <br/>
 >[Docker Login 공식 문서](https://docs.docker.com/reference/cli/docker/login) <br/>
@@ -62,7 +73,7 @@ stages {
 
 <br/>
 
-4. Docker Image 실행
+#### 3. Docker 컨테이너 실행
 
 - `ssh` 명령어를 통해 원격 서버에 접속합니다.
 
