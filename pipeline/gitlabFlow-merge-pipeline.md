@@ -2,7 +2,7 @@
 
 ## 목차
 
-1. [tools](#1-tools)
+1. [Tools](#1-tools)
 2. [환경 변수 설정](#2-환경-변수-설정)
 3. [Milestone 정보 가져오기](#3-milestone-정보-가져오기)
 4. [Target 브랜치를 pre-production 브랜치에 병합 및 테스트](#4-target-브랜치를-pre-production-브랜치에-병합-및-테스트)
@@ -10,7 +10,7 @@
 
 ## Pipeline 설명
 
-#### 1. tools
+#### 1. Tools
 
 - Jenkins가 사용할 도구의 이름을 지정합니다.
 
