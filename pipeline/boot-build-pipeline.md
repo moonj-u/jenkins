@@ -22,7 +22,7 @@
 
 <br>
 
-2. git clone
+#### 2. git clone
 
 - dir()
 
