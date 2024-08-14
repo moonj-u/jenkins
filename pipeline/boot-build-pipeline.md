@@ -92,7 +92,7 @@
 
 <br/>
 
-## 예시) 최종 Pipleine
+## 예시) 최종 Pipeline
 
 ```groovy
 pipeline {
