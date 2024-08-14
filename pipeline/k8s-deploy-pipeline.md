@@ -13,6 +13,12 @@
 
 - 배포에 필요한 Kubernetes YAML 파일의 경로와 Docker Hub 인증 정보를 환경 변수로 설정합니다.
 
+```groovy
+environment {
+    //
+}
+```
+
 <br/>
 
 #### 2. YAML 파일 원격 서버 배포 및 Docker Image 다운로드
