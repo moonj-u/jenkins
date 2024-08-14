@@ -14,6 +14,8 @@
     }
 ```
 
+<br/>
+
 2. 환경 변수 설정
 
 - GitLab PlugIn에 정의된 변수를 활용해서 Source 브랜치와 Target 브랜치, 그리고 Milestone의 Iid를 환경 변수로 설정합니다.
@@ -22,28 +24,142 @@
 
 - private access token은 GitLab >> Settings >> Access Tokens에서 생성할 수 있습니다.
 
-3. Milestone Title 가져오기
+<br/>
 
-- `def` 변수를 사용하기 위해 script 블록 내부에서 Groovy 코드를 작성합니다.
+3. Milestone 정보 가져오기
 
-```groovy
-stages {
-    stage() {
-        steps {
-            script {
-                //
+- Script Pipeline
+
+    - `def` 변수와 복잡한 작업을 처리하기 위해 선언적 파이프라인이 아닌 스크립트 파이프라인을 사용합니다.
+
+    - `script 블록`을 활용하여 Groovy 코드를 작성합니다.
+
+    ```groovy
+    stages {
+        stage() {
+            steps {
+                script {
+                    //
+                }
             }
         }
     }
-}
-```
+    ```
 
-3. deleteDir()
+    <br/>
 
-- 이 메서드는 현재 디렉터리와 그 내용을 재귀적으로 삭제하는 메서드입니다.
+- Merge Request API 호출 및 변수 설정
 
-- Git 리포지터리에서 소스 코드를 체크아웃 및 병합 과정에서 이전 빌드의 파일로 인한 충돌 방지를 위해 현재 디렉터리를 삭제하고, 작업 공간을 최신 상태로 유지하기 위해서 해당 메서드를 사용합니다.
+    - `def [변수명] = sh(script: ..., returnStdout: true).trim()`
 
+        - `returnStdout: true`
+
+            - 명령어의 출력 결과를 표준 출력으로 반환합니다.
+
+            - 명령어의 결과를 변수에 저장할 수 있습니다.
+
+        - `trim`
+
+            - 출력된 결과의 앞뒤 공백을 제거합니다.
+
+        - `curl` 명령어를 사용하여 Merge Request API에 GET 요청을 보냅니다.
+
+            - `--header`
+
+                - 요청 헤더를 추가합니다.
+
+                - 인증 정보나 데이터 형식을 지정할 때 사용합니다.
+
+                - `PRIVATE-TOKEN` : GitLab API에 접근하기 위한 개인 액세스 토큰을 포함하는 헤더입니다.
+
+            - `url`
+
+                - API 요청을 보낼 URL입니다.
+
+>**참고** <br/>
+>[GitLab REST API 공식 문서](https://docs.gitlab.com/ee/api/rest/) <br/>
+>[GitLab Merge Requests API 공식 문서](https://docs.gitlab.com/ee/api/merge_requests.html)
+
+<br/>
+
+- readJSON 스텝 및 변수 설정
+
+    - `def jsonProps = readJSON text: props`
+
+        - readJSON 스텝을 사용하여 JSON 형식의 문자열을 Groovy 객체로 변환합니다.
+
+        - `text: props`
+            
+            - JSON 형식의 문자열이 저장된 변수를 의미합니다. 
+            
+            - sh 명령어를 통해 가져온 API 응답을 JSON 객체로 파싱 하여 변수에 저장합니다.
+
+        - `def milestoneTitle = jsonProps.milestone.title`
+
+            - 파싱 된 JSON 객체(jsonProps)에서 milestone 필드의 title 값을 추출하여 milestoneTitle 변수에 저장합니다.
+
+            - GitLab Merge Request의 마일스톤 제목을 나타냅니다.
+
+        - `def milestoneId = jsonProps.milestone.id`
+
+            - JSON 객체에서 milestone 필드의 id 값을 추출하여 milestoneId 변수에 저장합니다.
+
+            - GitLab Merge Request의 마일스톤 ID를 나타냅니다.
+
+        - `env.`
+
+            - 추출한 Milestone의 Title과 ID 값을 Jenkins 환경 변수로 설정합니다.
+
+<br/>
+
+4. Target 브랜치를 pre-producion 브랜치에 병합
+
+- deleteDir()
+
+    - 이 메서드는 현재 디렉터리와 그 내용을 재귀적으로 삭제하는 메서드입니다.
+
+    - Git 리포지터리에서 소스 코드를 체크아웃 및 병합 과정에서 이전 빌드의 파일로 인한 충돌 방지를 위해 현재 디렉터리를 삭제하고, 작업 공간을 최신 상태로 유지하기 위해서 해당 메서드를 사용합니다.
+
+- checkout scmGit
+
+    - Jenkins Pipeline에서 Git 리포지터리에서 소스 코드를 체크아웃 하기 위한 스텝입니다.
+
+    ```
+    checkout scmGit(...)
+    ```
+
+- branches
+
+    - checkout 할 브랜치를 지정합니다.
+
+    ```
+    branches : [[name : "브랜치명"]]
+    ```
+
+- userRemoteConfigs
+
+    - Git 리포지터리와 연결하기 위한 설정입니다.
+
+    - 원격 저장소의 URL과 Jenkins에서 설정한 자격 증명 정보를 사용하여 소스 코드를 다운로드할 수 있습니다.
+
+    ```
+    userRemoteConfigs : [[...]]
+    ```
+
+- git 로컬 사용자 정보 설정
+
+    - 전역 사용자와 로컬 사용자가 다를 경우 적용시킵니다.
+
+    ```groovy
+    git config user.name "[사용자명]"
+    git config user.emali "[이메일]"
+    ```
+
+- 병합
+
+    - 병합을 위해 pre-producion 브랜치로 체크아웃 합니다.
+
+    - `git merge` 명령어를 통해 Targer 브랜치를 pre-producion 브랜치에 병합합니다.
 
 
 ## 예시) 최종 Pipeline
@@ -107,7 +223,7 @@ pipeline {
                         script {
                             sh """
                                 git config user.name "이문주"
-                                git config user.email mj.lee@magnumbridge.co.kr
+                                git config user.email "mj.lee@magnumbridge.co.kr"
                                 git branch
                                 git checkout pre-production
                                 git merge --no-ff ${TARGET_BRANCH} -m "${env.MILESTONE_TITLE} version merge to pre-production"
