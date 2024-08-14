@@ -1,10 +1,12 @@
 # Jenkins 
 
 ## 1. Jenkins 개요
-```
-Jenkins는 소프트웨어 빌드, 테스트, 제공 또는 배포와 관련된 모든 종류의 작업을 자동화하는데 사용할 수 있는 독립형 오픈 소스 자동화 서버입니다.
 
-```  
+```
+Jenkins는 CI/CD Pipeline을 구축하고 관리하는 데 사용되는 독립형 오픈 소스 자동화 서버입니다.
+소프트웨어의 빌드, 테스트, 배포 등의 작업을 자동화하여 개발 프로세스를 효율적으로 관리할 수 있습니다.
+```
+
 <br/>
 
 ## 2. Jenkins 설치
@@ -67,7 +69,7 @@ Spring Boot 프로젝트 빌드
 ### 6-1. Node 프로젝트 빌드
 
 ```
-Vue3 프로젝트 빌드
+원격 저장소에서 소스 코드를 가져와 Vue3 프로젝트를 빌드
 ```
 
 #### 필요 PlugIn
@@ -78,7 +80,7 @@ Vue3 프로젝트 빌드
 
 1. 소스 코드 Clone
 
-- 작업할 디렉터리를 설정한 후, GitLab 저장소에서 main 브랜치를 Clone 합니다.
+- Jenkins 파이프라인에서 작업할 디렉터리를 설정한 후, GitLab 저장소에서 소스 코드를 Clone 합니다.
 
 - GitLab에 대한 인증 정보는 미리 설정해둔 `Credentials의 자격 증명`을 이용하여 접근합니다.
 
@@ -95,7 +97,7 @@ Vue3 프로젝트 빌드
 ### 6-2. Gradle 프로젝트 빌드
 
 ```
-Spring Boot 프로젝트 빌드
+원격 저장소에서 소스 코드를 가져와 Spring Boot 프로젝트를 빌드
 ```
 
 #### 필요 Plugin
@@ -132,13 +134,13 @@ Spring Boot 프로젝트 빌드
 
 1. 환경 변수 설정
 
-- 빌드 된 파일이 위치한 디렉터리와 Nginx 서버에서 파일을 저장할 디렉터리를 환경 변수로 설정합니다.
+- `Jenkins Server의 dist 폴더의 경로`와 `Nginx Server의 dist 폴더를 배포할 경로`를 환경 변수로 설정합니다.
 
 2. 파일 전송
 
 - `sshagent 블록`을 사용하여 Jenkins에서 설정한 SSH 키를 이용해 원격 서버에 인증합니다.
 
-- `scp 명령어`를 사용하여 dist 폴더를 Nginx 서버에서 파일을 저장할 디렉터리로 전송합니다.
+- `scp` 명령어를 사용하여 dist 폴더를 Nginx 서버에서 파일을 저장할 디렉터리로 전송합니다.
 
 > **자세한 사항은 [Vue3 Deploy Pipeline 구성 파일](pipeline/vue-deploy-pipeline.md)을 참고하세요.**
 
@@ -158,7 +160,7 @@ Spring Boot 프로젝트 빌드
 
 1. 환경 변수 설정
 
-- 빌드 된 war 파일의 위치와 Tomcat 서버에서 `webapps 폴더`의 위치를 환경 변수로 설정합니다.
+- `Jenkins Server의 war 파일의 경로`와 `Tomcat Server의 war 파일을 배포할 경로`를 환경 변수로 설정합니다.
 
 2. 파일 전송
 
@@ -182,9 +184,9 @@ Spring Boot, Vue3 프로젝트 빌드 및 Docker Image 생성
 
 #### 필요 Plugin
 
-1. [Gradle Plugin](https://plugins.jenkins.io/gradle/) - Spring Boot 프로젝트
+1. [NodeJS Plugin](https://plugins.jenkins.io/nodejs/) - Vue3 프로젝트
 
-2. [NodeJS Plugin](https://plugins.jenkins.io/nodejs/) - Vue3 프로젝트
+2. [Gradle Plugin](https://plugins.jenkins.io/gradle/) - Spring Boot 프로젝트
 
 3. [SSH Agent Plugin](https://plugins.jenkins.io/ssh-agent/)
 
@@ -192,15 +194,15 @@ Spring Boot, Vue3 프로젝트 빌드 및 Docker Image 생성
 
 1. 프로젝트 빌드
 
-- Spring Boot를 빌드 : [6-2. Gradle 프로젝트 빌드](#6-2-gradle-프로젝트-빌드)와 동일하게 진행됩니다.
-
 - Vue3 프로젝트 빌드 : [6-1. Node 프로젝트 빌드](#6-1-node-프로젝트-빌드)와 동일하게 진행됩니다.
+
+- Spring Boot를 빌드 : [6-2. Gradle 프로젝트 빌드](#6-2-gradle-프로젝트-빌드)와 동일하게 진행됩니다.
 
 2. Docker Image 생성
 
 - 프로젝트 빌드 후 `build.gradle`에 설정된 jib 플러그인을 `gradle jib` 명령어를 통해 Image를 생성합니다.
 
-- 해당 방법은 Spring Boot와 Vue3 모두 적용됩니다.
+- 해당 Pipeline의 구성은 Spring Boot와 Vue3 모두 적용됩니다.
 
 > **자세한 사항은 [Docker Build Pipeline 구성 파일](pipeline/docker-build-pipeline.md)을 참고하세요.**
 
@@ -231,7 +233,7 @@ Spring Boot, Vue3 프로젝트 빌드 및 Docker Image 생성
 
 - `docker pull` 명령어를 이용하여 빌드 시 Docker Hub에 업로드된 Docker Image를 원격 서버로 가져옵니다.
 
-- 가져온 Docker Image를 서버에 배포합니다.
+- 가져온 Docker Image를 `docker run` 명령어로 docker 컨테이너를 실행시킵니다.
 
 > **자세한 사항은 [Docker Deploy Pipeline 구성 파일](pipeline/docker-deploy-pipeline.md)을 참고하세요.**
 
@@ -322,12 +324,16 @@ Git Flow 배포 전략에 따라 Jenkins 파이프라인을 설정하여 자동�
 ### 6-9. GitLab Flow 배포 전략에 따른 Jenkins P/L
 
 ```
-GitLab Flow 배포 전략에 따라 Webhook을 이용하여 Jenkins 파이프라인을 설정하고, 자동으로 병합 및 빌드를 수행
+GitLab Flow 배포 전략에 따라 Jenkins Pipeline을 구성하고, Webhook을 통해 자동으로 병합 및 빌드를 수행
 ```
 
 #### 필요 Plugin
 
 1. [Gradle Plugin](https://plugins.jenkins.io/gradle/)
+
+2. [Pipeline Utility Steps Plugin](https://plugins.jenkins.io/pipeline-utility-steps/)
+
+    - [Jenkins 공식 문서](https://www.jenkins.io/doc/pipeline/steps/pipeline-utility-steps/)
 
 #### Jenkins Pipeline 구성
 
@@ -339,13 +345,25 @@ GitLab Flow 배포 전략에 따라 Webhook을 이용하여 Jenkins 파이프라
         
         - Jenkins 구성에서 `Opened Merge Request Events`를 체크합니다.
 
-    2. 병합 및 단위 테스트
+    2. 환경 변수 설정
+
+        - GitLab PlugIn에 정의된 변수를 활용해서 Source 브랜치와 Target 브랜치, 그리고 Milesotone의 Iid를 환경 변수로 설정합니다.
+
+        - GitLab API 호출에 필요한 private access token을 환경 변수로 설정합니다.
+
+    3. 병합 및 단위 테스트
     
         - GitLab에서 MR 요청 시 Webhook에 의해 트리거된 Jenkins 파이프라인에서 Source 브랜치와 Target 브랜치를 병합 후 단위 테스트를 진행합니다.
 
-    3. MR(Merge Request)에 Comment 추가
+    4. MR(Merge Request)에 Comment 추가
     
-        - 단위 테스트 성공 시 Merge Request에 Comment를 추가하는 작업이 실행됩니다.
+        - 테스트 성공 시
+        
+            - Merge Request에 `unit test success` Comment를 전달합니다.
+
+        - 테스트 실패 시
+
+            - Merge Request에 `unit test failure` Comment를 전달합니다.
 
 > **자세한 사항은 [Merge Request Comment Pipeline 구성 파일](pipeline/mr-comment-pipeline.md)을 참고하세요.**
 
@@ -375,8 +393,12 @@ GitLab Flow 배포 전략에 따라 Webhook을 이용하여 Jenkins 파이프라
 
     4. 업로드 및 Revert
 
-        - 성공 시 pre-production 브랜치와 태그를 원격 저장소에 업로드합니다.
+        - 테스트 성공 시 
+        
+            - pre-production 브랜치와 태그를 원격 저장소에 업로드합니다.
 
-        - 실패 시 Target 브랜치로 체크아웃하여 revert를 진행 후 원격 저장소에 업로드합니다.
+        - 테스트 실패 시
+        
+            - Target 브랜치로 체크아웃하여 revert를 진행 후 원격 저장소에 업로드합니다.
 
 > **자세한 사항은 [GitLab Flow Merge Pipeline 구성 파일](pipeline/gitlabFlow-merge-pipeline.md)을 참고하세요.**
