@@ -2,7 +2,7 @@
 
 ## 목차
 
-1. [tools](#1-tools)
+1. [Tools](#1-tools)
 2. [환경 변수 설정](#2-환경-변수-설정)
 3. [Git Checkout](#3-git-checkout)
 4. [브랜치 병합](#4-브랜치-병합)
@@ -11,7 +11,7 @@
 
 ## Pipeline 설명
 
-#### 1. tools
+#### 1. Tools
 
 - Jenkins가 사용할 도구의 이름을 지정합니다.
 
@@ -32,6 +32,12 @@
 - GitLab API 호출에 필요한 private access token을 환경 변수로 설정합니다.
 
 - private access token은 GitLab >> Settings >> Access Tokens에서 생성할 수 있습니다.
+
+```groovy
+environment {
+    //
+}
+```
 
 <br/>
 
