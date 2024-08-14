@@ -1,8 +1,14 @@
 # Spring Boot Build Pipeline
 
+## 목차
+
+1. [tools](#1-tools)
+2. [git clone](#2-git-clone)
+3. [예시) 최종 Pipeline](#예시-최종-pipeline)
+
 ## Pipeline 설명
 
-1. tools
+#### 1. tools
 
 - Jenkins가 사용할 도구의 이름을 지정합니다.
 
@@ -16,71 +22,73 @@
 
 <br>
 
-2. dir()
+2. git clone
 
-- 작업할 디렉터리를 지정합니다.
+- dir()
 
-- 지정된 디렉터리에 Git Clone 작업이 진행됩니다.
+    - 작업할 디렉터리를 지정합니다.
 
-```groovy
-    stage('git clone') {
-        steps {
-            dir('working-directory')
+    - 지정된 디렉터리에 Git Clone 작업이 진행됩니다.
+
+    ```groovy
+        stage('git clone') {
+            steps {
+                dir('working-directory')
+            }
         }
-    }
-```
+    ```
 
 <br>
 
-3. git branch
+- git branch
 
-- 설정한 브랜치를 클론합니다.
+    - 설정한 브랜치를 클론합니다.
 
-```groovy
-git branch: '브랜치명'
-```
-
-<br>
-
-4. changelog(선택 사항)
-
-- 변경 로그를 가져오지 않도록 설정합니다.
-
-```groovy
-changelog: false
-```
+    ```groovy
+    git branch: '브랜치명'
+    ```
 
 <br>
 
-5. credentialsId: 'credentials-id'
+- changelog(선택 사항)
 
-- 저장소 접근을 위한 자격 증명 ID를 설정합니다.
+    - 변경 로그를 가져오지 않도록 설정합니다.
 
-```groovy
-credentialsId: '자격 증명 ID'
-```
-
-<br>
-
-6. poll(선택 사항)
-
-- Git 저장소의 변경 사항을 주기적으로 확인하지 않도록 설정합니다.
-
-- 해당 사항은 선택 사항이며, 해당 Pipeline에서는 주기적인 변경 사항을 확인하여 빌드할 필요가 없기 때문에 false로 설정합니다.
-
-```groovy
-poll: false
-```
+    ```groovy
+    changelog: false
+    ```
 
 <br>
 
-7. url
+- credentialsId: 'credentials-id'
 
-- 클론할 원격 저장소의 URL을 지정합니다.
+    - 저장소 접근을 위한 자격 증명 ID를 설정합니다.
 
-```groovy
-url: '원격 저장소 URL'
-```
+    ```groovy
+    credentialsId: '자격 증명 ID'
+    ```
+
+<br>
+
+- poll(선택 사항)
+
+    - Git 저장소의 변경 사항을 주기적으로 확인하지 않도록 설정합니다.
+
+    - 해당 사항은 선택 사항이며, 해당 Pipeline에서는 주기적인 변경 사항을 확인하여 빌드할 필요가 없기 때문에 false로 설정합니다.
+
+    ```groovy
+    poll: false
+    ```
+
+<br>
+
+- url
+
+    - 클론할 원격 저장소의 URL을 지정합니다.
+
+    ```groovy
+    url: '원격 저장소 URL'
+    ```
 
 <br/>
 
