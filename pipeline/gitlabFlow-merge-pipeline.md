@@ -2,12 +2,11 @@
 
 ## 목차
 
-1. [tools](#tools)
-2. [환경 변수 설정](#환경-변수-설정)
-3. [Milestone 정보 가져오기](#milestone-정보-가져오기)
-4. [Target 브랜치를 pre-production 브랜치에 병합 및 테스트](#target-브랜치를-pre-production-브랜치에-병합-및-테스트)
-5. [단위 테스트](#단위-테스트)
-6. [예시) 최종 Pipeline](#예시-최종-pipeline)
+1. [tools](#1-tools)
+2. [환경 변수 설정](#2-환경-변수-설정)
+3. [Milestone 정보 가져오기](#3-milestone-정보-가져오기)
+4. [Target 브랜치를 pre-production 브랜치에 병합 및 테스트](#4-target-브랜치를-pre-production-브랜치에-병합-및-테스트)
+5. [예시) 최종 Pipeline](#예시-최종-pipeline)
 
 ## Pipeline 설명
 
