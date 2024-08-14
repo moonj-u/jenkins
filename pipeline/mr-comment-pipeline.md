@@ -1,8 +1,17 @@
 # GitLab Merge Request Comment 작성 pipeline
 
+## 목차
+
+1. [tools](#1-tools)
+2. [환경 변수 설정](#2-환경-변수-설정)
+3. [Git Checkout](#3-git-checkout)
+4. [브랜치 병합](#4-브랜치-병합)
+5. [단위 테스트](#5-단위-테스트)
+6. [예시) 최종 Pipeline](#6-예시-최종-pipeline)
+
 ## Pipeline 설명
 
-1. tools
+#### 1. tools
 
 - Jenkins가 사용할 도구의 이름을 지정합니다.
 
@@ -16,57 +25,59 @@
 
 <br/>
 
-2. 환경 변수 설정
+#### 2. 환경 변수 설정
 
 - GitLab PlugIn에 정의된 변수를 활용해서 Source 브랜치와 Target 브랜치, 그리고 Milesotone의 Iid를 환경 변수로 설정합니다.
 
 - GitLab API 호출에 필요한 private access token을 환경 변수로 설정합니다.
 
-- private access token은 GitLab >> Settings >> Access Tokens에서 생성할 수 있다.
+- private access token은 GitLab >> Settings >> Access Tokens에서 생성할 수 있습니다.
 
 <br/>
 
-3. deleteDir()
+#### 3. Git Checkout
 
-- 이 메서드는 현재 디렉터리와 그 내용을 재귀적으로 삭제하는 메서드입니다.
+- deleteDir()
 
-- Git 리포지터리에서 소스 코드를 체크아웃 및 병합 과정에서 이전 빌드의 파일로 인한 충돌 방지를 위해 현재 디렉터리를 삭제하고, 작업 공간을 최신 상태로 유지하기 위해서 해당 메서드를 사용합니다.
+    - 이 메서드는 현재 디렉터리와 그 내용을 재귀적으로 삭제하는 메서드입니다.
 
-<br/>
-
-4. checkout scmGit
-
-- jenkins Pipeline에서 Git 리포지터리에서 소스 코드를 체크아웃 하기 위한 스탭입니다.
-
-```
-checkout scmGit(...)
-```
+    - Git 리포지터리에서 소스 코드를 체크아웃 및 병합 과정에서 이전 빌드의 파일로 인한 충돌 방지를 위해 현재 디렉터리를 삭제하고, 작업 공간을 최신 상태로 유지하기 위해서 해당 메서드를 사용합니다.
 
 <br/>
 
-5. branches
+- checkout scmGit
 
-- checkout 할 브랜치를 지정합니다.
+    - jenkins Pipeline에서 Git 리포지터리에서 소스 코드를 체크아웃 하기 위한 스탭입니다.
 
-```
-branches : [[name : "브랜치명"]]
-```
-
-<br/>
-
-6. userRemoteConfigs
-
-- Git 리포지터리와 연결하기 위한 설정입니다.
-
-- 원격 저장소의 URL과 Jenkins에서 설정한 자격 증명 정보를 사용하여 소스 코드를 다운로드할 수 있습니다.
-
-```
-userRemoteConfigs : [[...]]
-```
+    ```
+    checkout scmGit(...)
+    ```
 
 <br/>
 
-7. 브랜치 병합
+- branches
+
+    - checkout 할 브랜치를 지정합니다.
+
+    ```
+    branches : [[name : "브랜치명"]]
+    ```
+
+<br/>
+
+- userRemoteConfigs
+
+    - Git 리포지터리와 연결하기 위한 설정입니다.
+
+    - 원격 저장소의 URL과 Jenkins에서 설정한 자격 증명 정보를 사용하여 소스 코드를 다운로드할 수 있습니다.
+
+    ```
+    userRemoteConfigs : [[...]]
+    ```
+
+<br/>
+
+#### 4. 브랜치 병합
 
 - `git fetch origin`
 
@@ -84,17 +95,13 @@ userRemoteConfigs : [[...]]
 
 <br/>
 
-8. 테스트 진행
+#### 5. 단위 테스트
 
 - `gradle test` 명령어로 단위 테스트를 진행하고, `post 블록`을 사용하여 테스트 결과에 따라 후속 작업을 진행합니다.
 
 - 테스트 성공 시 `unit test success`라는 Comment를 `curl` 명령어를 통해 전달합니다.
 
 - 테스트 실패 시 'unit test failure'라는 Comment를 `curl` 명령어를 통해 전달합니다.
-
-<br/>
-
-9. GitLab API 호출
 
 - `curl` 명령어를 사용하여 GitLab API에 POST 요청을 보냅니다.
 
