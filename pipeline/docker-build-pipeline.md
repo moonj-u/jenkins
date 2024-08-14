@@ -2,14 +2,14 @@
 
 ## 목차
 
-1. [tools](#1-tools)
-2. [git clone](#2-git-clone)
+1. [Tools](#1-tools)
+2. [Git Clone](#2-git-clone)
 3. [Vue3 Pipeline에서 vite 설치](#3-vue3-pipeline에서-vite-설치)
 4. [예시) 최종 Pipeline](#예시-최종-pipeline)
 
 ## Pipeline 설명
 
-#### 1. tools
+#### 1. Tools
 
 - Jenkins가 사용할 도구의 이름을 지정합니다.
 
@@ -23,7 +23,7 @@
 
 <br>
 
-#### 2. git clone
+#### 2. Git Clone
 - dir()
 
     - 작업할 디렉터리를 지정합니다.
@@ -74,7 +74,7 @@
 
     - Git 저장소의 변경 사항을 주기적으로 확인하지 않도록 설정합니다.
 
-    - 해당 사항은 선택 사항이며, 해당 Pipeline에서는 주기적인 변경 사항을 확인하여 빌드할 필요가 없기 때문에 false로 설정합니다.
+    - 해당 사항은 선택 사항이며, 해당 Pipeline에서는 주기적인 변경 사항을 확인하여 빌드 할 필요가 없기 때문에 false로 설정합니다.
 
     ```
     poll: false
