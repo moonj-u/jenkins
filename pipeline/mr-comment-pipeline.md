@@ -107,7 +107,7 @@ environment {
 
 - 테스트 성공 시 `unit test success`라는 Comment를 `curl` 명령어를 통해 전달합니다.
 
-- 테스트 실패 시 'unit test failure'라는 Comment를 `curl` 명령어를 통해 전달합니다.
+- 테스트 실패 시 `unit test failure`라는 Comment를 `curl` 명령어를 통해 전달합니다.
 
 - `curl` 명령어를 사용하여 GitLab API에 POST 요청을 보냅니다.
 
