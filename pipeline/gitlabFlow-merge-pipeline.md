@@ -1,8 +1,17 @@
 # GitLab Flow 배포 전략에 따른 pre-production merge pipeline
 
+## 목차
+
+1. [tools](#tools)
+2. [환경 변수 설정](#환경-변수-설정)
+3. [Milestone 정보 가져오기](#milestone-정보-가져오기)
+4. [Target 브랜치를 pre-production 브랜치에 병합 및 테스트](#target-브랜치를-pre-production-브랜치에-병합-및-테스트)
+5. [단위 테스트](#단위-테스트)
+6. [예시) 최종 Pipeline](#예시-최종-pipeline)
+
 ## Pipeline 설명
 
-1. tools
+#### 1. tools
 
 - Jenkins가 사용할 도구의 이름을 지정합니다.
 
@@ -16,7 +25,7 @@
 
 <br/>
 
-2. 환경 변수 설정
+#### 2. 환경 변수 설정
 
 - GitLab PlugIn에 정의된 변수를 활용해서 Source 브랜치와 Target 브랜치, 그리고 Milestone의 Iid를 환경 변수로 설정합니다.
 
@@ -26,7 +35,7 @@
 
 <br/>
 
-3. Milestone 정보 가져오기
+#### 3. Milestone 정보 가져오기
 
 - Script Pipeline
 
@@ -94,25 +103,25 @@
             
             - sh 명령어를 통해 가져온 API 응답을 JSON 객체로 파싱 하여 변수에 저장합니다.
 
-        - `def milestoneTitle = jsonProps.milestone.title`
+    - `def milestoneTitle = jsonProps.milestone.title`
 
-            - 파싱 된 JSON 객체(jsonProps)에서 milestone 필드의 title 값을 추출하여 milestoneTitle 변수에 저장합니다.
+        - 파싱 된 JSON 객체(jsonProps)에서 milestone 필드의 title 값을 추출하여 milestoneTitle 변수에 저장합니다.
 
-            - GitLab Merge Request의 마일스톤 제목을 나타냅니다.
+        - GitLab Merge Request의 마일스톤 제목을 나타냅니다.
 
-        - `def milestoneId = jsonProps.milestone.id`
+    - `def milestoneId = jsonProps.milestone.id`
 
-            - JSON 객체에서 milestone 필드의 id 값을 추출하여 milestoneId 변수에 저장합니다.
+        - JSON 객체에서 milestone 필드의 id 값을 추출하여 milestoneId 변수에 저장합니다.
 
-            - GitLab Merge Request의 마일스톤 ID를 나타냅니다.
+        - GitLab Merge Request의 마일스톤 ID를 나타냅니다.
 
-        - `env.`
+    - `env.`
 
-            - 추출한 Milestone의 Title과 ID 값을 Jenkins 환경 변수로 설정합니다.
+        - 추출한 Milestone의 Title과 ID 값을 Jenkins 환경 변수로 설정합니다.
 
 <br/>
 
-4. Target 브랜치를 pre-producion 브랜치에 병합
+#### 4. Target 브랜치를 pre-producion 브랜치에 병합 및 테스트
 
 - deleteDir()
 
@@ -146,21 +155,52 @@
     userRemoteConfigs : [[...]]
     ```
 
-- git 로컬 사용자 정보 설정
-
-    - 전역 사용자와 로컬 사용자가 다를 경우 적용시킵니다.
-
-    ```groovy
-    git config user.name "[사용자명]"
-    git config user.emali "[이메일]"
-    ```
-
 - 병합
+    - git 로컬 사용자 정보 설정
+
+        - 전역 사용자와 로컬 사용자가 다를 경우 적용시킵니다.
+
+        ```groovy
+        git config user.name "[사용자명]"
+        git config user.emali "[이메일]"
+        ```
 
     - 병합을 위해 pre-producion 브랜치로 체크아웃 합니다.
 
-    - `git merge` 명령어를 통해 Targer 브랜치를 pre-producion 브랜치에 병합합니다.
+    - `git merge --no-ff [Target 브랜치] -m "[Commit 메세지]"`
+    
+        - `--no-ff` 옵션을 사용하여 병합 시 fast-forward 병합을 방지하고, 항상 새로운 커밋을 생성하여 병합을 기록합니다.
+    
+    - `git tag -f -a [Milestone Title] -m "[Commit 메세지]"`
+    
+        - `-f` 옵션은 이미 존재하는 태그를 덮어쓰는 옵션으로, 기존 태그를 업데이트하거나 수정해야할 때 유용합니다.
 
+        - `a` 옵션은 태그에 주석을 달아 태그에 대한 설명을 추가하는 목적으로 사용합니다.
+
+
+>**참고** <br/>
+>[Git merge 공식 문서](https://git-scm.com/docs/git-merge) <br/>
+>[Git tag 공식 문서](https://git-scm.com/docs/git-tag)
+
+<br/>
+
+- 단위 테스트
+
+    - `gradle test` 명령어를 통해 단위 테스트를 진행 합니다.
+
+    - 테스트 성공 시 
+    
+        - 병합된 pre-producion 브랜치와 태그를 원격 저장소에 업로드 합니다.
+
+    - 테스트 실패 시
+    
+        - `git log origin/${TARGET_BRANCH} --pretty="%H" -n 1` 명령어를 사용하여 최신 커밋의 해시 값을 가져와 변수로 설정합니다.
+        
+        - 변수로 설정한 해시 값을 사용하여 해당 커밋을 `git revert -m 1 [변수명]` 명령어를 사용하여 변경 사항을 되돌립니다.
+
+        - 되돌린 변경 사항을 원격 저장소에 업로드합니다.
+
+<br/>
 
 ## 예시) 최종 Pipeline
 
