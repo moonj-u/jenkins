@@ -32,6 +32,12 @@
 
 - private access token은 GitLab >> Settings >> Access Tokens에서 생성할 수 있습니다.
 
+```groovy
+environment {
+    //
+}
+```
+
 <br/>
 
 #### 3. Milestone 정보 가져오기
@@ -104,15 +110,15 @@
 
     - `def milestoneTitle = jsonProps.milestone.title`
 
-        - 파싱 된 JSON 객체(jsonProps)에서 milestone 필드의 title 값을 추출하여 milestoneTitle 변수에 저장합니다.
+        - 파싱 된 JSON 객체(jsonProps)에서 Milestonee의 Title 값을 추출하여 milestoneTitle 변수에 저장합니다.
 
         - GitLab Merge Request의 마일스톤 제목을 나타냅니다.
 
     - `def milestoneId = jsonProps.milestone.id`
 
-        - JSON 객체에서 milestone 필드의 id 값을 추출하여 milestoneId 변수에 저장합니다.
+        - JSON 객체에서 Milestone의 ID 값을 추출하여 milestoneId 변수에 저장합니다.
 
-        - GitLab Merge Request의 마일스톤 ID를 나타냅니다.
+        - GitLab Merge Request의 Milestone ID를 나타냅니다.
 
     - `env.`
 
