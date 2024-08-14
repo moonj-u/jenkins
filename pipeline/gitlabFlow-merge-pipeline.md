@@ -120,7 +120,7 @@
 
 <br/>
 
-#### 4. Target 브랜치를 pre-producion 브랜치에 병합 및 테스트
+#### 4. Target 브랜치를 pre-production 브랜치에 병합 및 테스트
 
 - deleteDir()
 
