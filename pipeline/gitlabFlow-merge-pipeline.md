@@ -221,7 +221,7 @@ pipeline {
         SOURCE_BRANCH = "${env.gitlabSourceBranch}"
         TARGET_BRANCH = "${env.gitlabTargetBranch}"
         MR_IiD = "${env.gitlabMergeRequestIid}"
-        GITLAB_PRIVATE_TOKEN = 'glpat-TAyaq4sMpPzPkMxE7if9'
+        GITLAB_PRIVATE_TOKEN = 'private access token'
     }
     
     stages {
