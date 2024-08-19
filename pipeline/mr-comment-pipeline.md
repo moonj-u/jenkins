@@ -7,7 +7,7 @@
 3. [Git Checkout](#3-git-checkout)
 4. [브랜치 병합](#4-브랜치-병합)
 5. [단위 테스트](#5-단위-테스트)
-6. [예시) 최종 Pipeline](#6-예시-최종-pipeline)
+6. [예시) 최종 Pipeline](#예시-최종-pipeline)
 
 ## Pipeline 설명
 
