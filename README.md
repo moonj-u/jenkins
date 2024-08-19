@@ -88,6 +88,8 @@ npm install vite --save-dev
 npm run build
 ```
 
+> **자세한 사항은 [Vue3 Build Freestyle Job 구성 파일](pipeline/vue-build-freestyle.md)을 참고하세요.**
+
 <br/>
 
 ### 5-2. Gradle 프로젝트 빌드
@@ -123,6 +125,8 @@ Spring Boot 프로젝트 빌드
 ```
 clean build
 ```
+
+> **자세한 사항은 [Spring Boot Build Freestyle Job 구성 파일](pipeline/boot-build-freestyle.md)을 참고하세요.**
 
 <br/>
 
