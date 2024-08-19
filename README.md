@@ -54,12 +54,74 @@ Jenkins는 CI/CD Pipeline을 구축하고 관리하는 데 사용되는 독립�
 Vue3 프로젝트 빌드
 ```
 
+#### 필요 PlugIn
+
+1. [NodeJS Plugin](https://plugins.jenkins.io/nodejs/)
+
+#### Jenkins Job 구성
+
+1. Freestyle Job 생성
+
+- Jenkins 대시보드에서 `새로운 Item`을 클릭하고, `Freestyle project`를 선택하여 새로운 Job을 생성합니다.
+
+2. 소스 코드 관리
+
+- 소스 코드 관리 섹션에서 Git을 선택합니다.
+
+- GitLab 저장소 URL과 인증 정보를 선택합니다.
+
+3. 빌드 환경
+
+- 빌드 환경 섹션에서 `Provide Node & npm bin/ folder to PATH`을 선택합니다.
+
+- Jenkins 관리 >> Tools 에서 설정한 Node.js Version을 선택합니다.
+
+4. Build Steps
+
+- Build Steps 섹션에서 `Execute shell`을 선택합니다.
+
+- 아래의 명령어를 입력하여 의존성 패키지를 설치하고, Vite를 개발 의존성으로 설치한 후, 프로젝트를 빌드합니다.
+
+```
+npm install
+npm install vite --save-dev
+npm run build
+```
+
 <br/>
 
-### 5-2. Maven 프로젝트 빌드
+### 5-2. Gradle 프로젝트 빌드
 
 ```
 Spring Boot 프로젝트 빌드
+```
+
+#### 필요 Plugin
+
+1. [Gradle Plugin](https://plugins.jenkins.io/gradle/)
+
+#### Jenkins Job 구성
+
+1. Freestyle Job 생성
+
+- Jenkins 대시보드에서 `새로운 Item`을 클릭하고, `Freestyle project`를 선택하여 새로운 Job을 생성합니다.
+
+2. 소스 코드 관리
+
+- 소스 코드 관리 섹션에서 Git을 선택합니다.
+
+- GitLab 저장소 URL과 인증 정보를 선택합니다.
+
+3. Build Steps
+
+- Build Steps 섹션에서 `Invoke Gradle`을 선택합니다.
+
+- Jenkins 관리 >> Tools에서 설정한 Gradle Version을 설정합니다.
+
+- Tasks 섹션에서 `clean`, `build` 명령어를 작성합니다.
+
+```
+clean build
 ```
 
 <br/>
