@@ -2,6 +2,15 @@
 
 ## 목차
 
+1. [Tools](#1-tools)
+2. [Git Checkout](#2-git-checkout)
+3. [when 지시어를 활용한 브랜치별 Stage 실행](#3-when-지시어를-활용한-브랜치별-stage-실행)
+4. [stage 공통 작업](#4-stage-공통-작업)
+5. [develop branch를 release branch에 병합](#5-develop-branch를-release-branch에-병합)
+6. [develop branch를 master branch에 병합](#6-develop-branch를-master-branch에-병합)
+7. [master branch 빌드 및 Docker Image 생성](#7-master-branch-빌드-및-docker-image-생성)
+8. [예시) 최종 Pipeline](#예시-최종-pipeline)
+
 ## Pipeline 설명
 
 #### 1. Tools
@@ -18,7 +27,7 @@
 
 <br/>
 
-#### 2. Git checkout
+#### 2. Git Checkout
 
 - deleteDir()
 
