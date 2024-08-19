@@ -89,13 +89,7 @@ Vue3 프로젝트 빌드
 
 - Build Steps 섹션에서 `Execute shell`을 선택합니다.
 
-- 아래의 명령어를 입력하여 의존성 패키지를 설치하고, Vite를 개발 의존성으로 설치한 후, 프로젝트를 빌드합니다.
-
-```
-npm install
-npm install vite --save-dev
-npm run build
-```
+- `npm` 명령어를 사용하여 의존성 패키지를 설치하고, Vite를 개발 의존성으로 설치한 후, 프로젝트를 빌드합니다.
 
 > **자세한 사항은 [Vue3 Build Freestyle Job 구성 파일](pipeline/vue-build-freestyle.md)을 참고하세요.**
 
@@ -129,11 +123,7 @@ Spring Boot 프로젝트 빌드
 
 - Jenkins 관리 >> Tools에서 설정한 Gradle Version을 설정합니다.
 
-- Tasks 섹션에서 `clean`, `build` 명령어를 작성합니다.
-
-```
-clean build
-```
+- Tasks 섹션에서 Gradle 빌드 작업을 정의합니다.
 
 > **자세한 사항은 [Spring Boot Build Freestyle Job 구성 파일](pipeline/boot-build-freestyle.md)을 참고하세요.**
 
