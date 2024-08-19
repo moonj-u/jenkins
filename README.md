@@ -1,4 +1,13 @@
-# Jenkins 
+# Jenkins
+
+## 목차
+
+1. [Jenkins 개요](#1-jenkins-개요)
+2. [Jenkins 설치](#2-jenkins-설치)
+3. [공통 Jenkins 작업](#3-공통-jenkins-작업)
+4. [공통 Plugin Install](#4-공통-plugin-install)
+5. [Jenkins Plugin 방식을 사용한 빌드](#5-jenkins-plugin-방식을-사용한-빌드)
+6. [Jenkins P/L 방식을 사용한 빌드 및 배포](#6-jenkins-pl-방식을-사용한-빌드-및-배포)
 
 ## 1. Jenkins 개요
 
@@ -46,7 +55,7 @@ Jenkins는 CI/CD Pipeline을 구축하고 관리하는 데 사용되는 독립�
 
 <br/>
 
-## 5. Jenkins PlugIn 방식을 사용한 빌드 및 배포
+## 5. Jenkins PlugIn 방식을 사용한 빌드
 
 ### 5-1. Node 프로젝트 빌드
 
