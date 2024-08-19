@@ -6,11 +6,15 @@
 
 - Jenkins 대시보드에서 `새로운 Item`을 클릭하고, `Freestyle project`를 선택하여 새로운 Job을 생성합니다.
 
+<br/>
+
 #### 2. General
 
 - Git Connection에서 Git을 선택합니다.
 
 ![Freestyle Job-1](images/freestyle-vue-1.png)
+
+<br/>
 
 #### 3. 소스 코드 관리
 
@@ -22,6 +26,8 @@
 
 ![Freestyle Job-1](images/freestyle-vue-2.png)
 
+<br/>
+
 #### 4. 빌드 환경
 
 - 빌드 환경 섹션에서 `Provide Node & npm bin/ folder to PATH`을 선택합니다.
@@ -29,6 +35,8 @@
 - Jenkins 관리 >> Tools 에서 설정한 Node.js Version을 선택합니다.
 
 ![Freestyle Job-1](images/freestyle-vue-3.png)
+
+<br/>
 
 #### 5. Build Steps
 
