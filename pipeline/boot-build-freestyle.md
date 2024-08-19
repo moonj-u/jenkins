@@ -6,11 +6,15 @@
 
 - Jenkins 대시보드에서 `새로운 Item`을 클릭하고, `Freestyle project`를 선택하여 새로운 Job을 생성합니다.
 
+<br/>
+
 #### 2. General
 
 - Git Connection에서 Git을 선택합니다.
 
 ![Freestyle Job-1](images/freestyle-boot-1.png)
+
+<br/>
 
 #### 3. 소스 코드 관리
 
@@ -21,6 +25,8 @@
 - Branches to build 섹션에서는 소스 코드 관리를 위한 브랜치명을 입력합니다.
 
 ![Freestyle Job-1](images/freestyle-boot-2.png)
+
+<br/>
 
 #### 4. Build Steps
 
