@@ -123,7 +123,7 @@ Spring Boot 프로젝트 빌드
 ### 6-3. nginx 형태 배포
 
 ```
-빌드된 Vue3 프로젝트를 Nginx Server에 배포
+빌드 된 Vue3 프로젝트를 Nginx Server에 배포
 ```
 
 #### 필요 Plugin
