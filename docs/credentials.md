@@ -2,7 +2,7 @@
 
 #### 1. Jenkins 관리 >> Credentials로 이동 후 global 탭을 클릭합니다.
 
-![credentials-1](images/credentials-1.png)
+![credentials-1](./images/credentials-1.png)
 
 #### 2. 우측 상단에 Add credentials를 클릭합니다.
 
